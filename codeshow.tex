@@ -5,20 +5,39 @@
 \makeatletter
 \newtoks\savedtokens
 \def\codeshow{%
+  \vspace{1em}\par\noindent%
   \global\savedtokens={}%
   \def\verbatim@processline{%
-    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line}%
+    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line^^J}%
     \the\verbatim@line\par}%
-  \verbatim}
+  \minipage{.608\textwidth}\verbatim}
 \def\endcodeshow{\endverbatim%
-  \par\fbox{BEFORE\scantokens\expandafter{\the\savedtokens}AFTER}}
+  \endminipage\hfill\fbox{\parbox{.372\textwidth}%
+    {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}\vspace{1em}\par}
 \makeatother
 
 \begin{document}
+
+token token token token token token token token token token token token token token token token token token token tokentoken token token token token token token token token token token token token token token token token token
 
 \begin{codeshow}
 aaa\fbox{hello}bbb
 ccc\fbox{world}ddd
 \end{codeshow}
+
+token token token token token token token token token token token token token token token token token token token tokentoken token token token token token token token token token token token token token token token token token
+
+\begin{codeshow}
+aaa$\alpha+\beta=\gamma$bbb
+ccc$\delta+\epsilon=\xi$ddd
+\end{codeshow}
+
+\begin{codeshow}
+aaa\textbf{bb}b
+
+cccddd
+\end{codeshow}
+
+token token token token token token token token token token token token token token token token token token token tokentoken token token token token token token token token token token token token token token token token token
 
 \end{document}
