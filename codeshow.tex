@@ -1,0 +1,24 @@
+% -*- coding: utf-8 -*-
+\documentclass[12pt]{article}
+\usepackage{verbatim}
+
+\makeatletter
+\newtoks\savedtokens
+\def\codeshow{%
+  \global\savedtokens={}%
+  \def\verbatim@processline{%
+    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line}%
+    \the\verbatim@line\par}%
+  \verbatim}
+\def\endcodeshow{\endverbatim%
+  \par\fbox{BEFORE\scantokens\expandafter{\the\savedtokens}AFTER}}
+\makeatother
+
+\begin{document}
+
+\begin{codeshow}
+aaa\fbox{hello}bbb
+ccc\fbox{world}ddd
+\end{codeshow}
+
+\end{document}
