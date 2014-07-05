@@ -4,14 +4,20 @@
 \ProvidesPackage{codeshow}[2014/07/05 v0.0.1 Show code and its result]
 \RequirePackage{verbatim,xcolor}
 
+\newbox\savedlines
 \newtoks\savedtokens
+
 \def\codeshow{%
-  \vspace{1em}\par\noindent%
+  \global\setbox\savedlines=\vbox{}%
   \global\savedtokens={}%
   \def\verbatim@processline{%
-    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line^^J}%
-    \the\verbatim@line\par}%
-  \minipage{.608\textwidth}\verbatim}
+    \global\setbox\savedlines=\vbox{\unvbox\savedlines\hbox{\the\verbatim@line}}%
+    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line^^J}}%
+  \verbatim}
 \def\endcodeshow{\endverbatim%
-  \endminipage\hfill\fbox{\parbox{.372\textwidth}%
-    {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}\vspace{1em}\par}
+  \vspace{1em}\par\noindent%
+  \colorbox{lightgray}{%
+    \begin{minipage}{.55\textwidth}{\usebox\savedlines}\end{minipage}}%
+  \hfill\fbox{\parbox{.40\textwidth}%
+    {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}%
+  \vspace{1em}\par}
