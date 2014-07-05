@@ -1,0 +1,17 @@
+% -*- coding: utf-8 -*-
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{codeshow}[2014/07/05 v0.0.1 Show code and its result]
+\RequirePackage{verbatim,xcolor}
+
+\newtoks\savedtokens
+\def\codeshow{%
+  \vspace{1em}\par\noindent%
+  \global\savedtokens={}%
+  \def\verbatim@processline{%
+    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line^^J}%
+    \the\verbatim@line\par}%
+  \minipage{.608\textwidth}\verbatim}
+\def\endcodeshow{\endverbatim%
+  \endminipage\hfill\fbox{\parbox{.372\textwidth}%
+    {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}\vspace{1em}\par}

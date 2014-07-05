@@ -1,20 +1,6 @@
 % -*- coding: utf-8 -*-
 \documentclass[12pt]{article}
-\usepackage{verbatim}
-
-\makeatletter
-\newtoks\savedtokens
-\def\codeshow{%
-  \vspace{1em}\par\noindent%
-  \global\savedtokens={}%
-  \def\verbatim@processline{%
-    \global\savedtokens=\expandafter{\the\expandafter\savedtokens\the\verbatim@line^^J}%
-    \the\verbatim@line\par}%
-  \minipage{.608\textwidth}\verbatim}
-\def\endcodeshow{\endverbatim%
-  \endminipage\hfill\fbox{\parbox{.372\textwidth}%
-    {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}\vspace{1em}\par}
-\makeatother
+\usepackage{codeshow}
 
 \begin{document}
 
