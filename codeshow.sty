@@ -20,9 +20,9 @@
 \def\endcodeshow{\endverbatim%
   \unskip\setbox0=\lastbox\egroup
   \global\setbox\savedlines=\box0
-  \vspace{1em}\par\noindent%
+  \addvspace{1em}\par\noindent%
   \colorbox{lightgray}{%
     \begin{minipage}{.55\textwidth}{\usebox\savedlines}\end{minipage}}%
   \hfill\fbox{\parbox{.40\textwidth}%
     {\scantokens\expandafter{\the\savedtokens\unskip\endinput}}}%
-  \vspace{1em}\par}
+  \par\addvspace{1em}}
